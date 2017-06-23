@@ -10,17 +10,19 @@
             $scope.state = {};
         }
 
-        $scope.editableState = angular.copy($scope.state);
-
         $scope.btnSubmitClick = function () {
-            if ($scope.editableState != 0) {
-                DataService.editState($scope.editableState).then(function (response) {
+            if ($routeParams.stateId) {
+                DataService.editState($scope.state).then(function (response) {
+                    GoBack();
                 })
             } else {
-                DataService.addState($scope.editableState).then(function (response) {
+                DataService.addState($scope.state).then(function (response) {
+                    GoBack();
                 })
             }
-            $scope.state = angular.copy($scope.editableState);
-            $location.path('/state');
         }
+
+        var GoBack = function () {
+            $location.path('/state');
+        };
 });

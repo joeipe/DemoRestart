@@ -21,13 +21,13 @@ namespace DemoRestart
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            CamelCasing();
+            //CamelCasing();
         }
-
+        /*
         private void CamelCasing()
         {
             var jsonFormatter = GlobalConfiguration.Configuration.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        }
+        }*/
     }
 }
