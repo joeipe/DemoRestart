@@ -1,0 +1,12 @@
+C:\Development\DemoRestart\DemoRestart.Infrastructure\obj\Debug\DemoRestart.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\DemoRestart.Infrastructure.dll.config
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\DemoRestart.Infrastructure.dll
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\DemoRestart.Infrastructure.pdb
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\DemoRestart.Core.dll
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\EntityFramework.dll
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\DemoRestart.Core.pdb
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\EntityFramework.xml
+C:\Development\DemoRestart\DemoRestart.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Development\DemoRestart\DemoRestart.Infrastructure\obj\Debug\DemoRestart.Infrastructure.dll
+C:\Development\DemoRestart\DemoRestart.Infrastructure\obj\Debug\DemoRestart.Infrastructure.pdb
