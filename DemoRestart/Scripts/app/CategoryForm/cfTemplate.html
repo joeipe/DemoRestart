@@ -1,0 +1,54 @@
+﻿<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Category</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="#!/home">Home</a></li>
+            <li><a href="#!/category">Category</a></li>
+            <li class="active">{{ActionTxt}} Category</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <!-- Begin Content -->
+        <div class="col-md-12">
+            <!-- General Unify Forms -->
+            <form action="#" class="sky-form">
+                <header>{{ActionTxt}} Category</header>
+                <fieldset>
+                    <section>
+                        <label class="label">Category Name</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-asterisk"></i>
+                            <input type="text" ng-required="true" ng-model="category.categoryName">
+                        </label>
+                    </section>
+                    <section>
+                        <label class="label">Description</label>
+                        <label class="input">
+                            <input type="text" ng-model="category.description">
+                        </label>
+                    </section>
+                    <section>
+                        <label class="label">Picture</label>
+                        <label for="file" class="input input-file">
+                            <div class="button"><input type="file" id="file" ngf-select="upload($file)" accept="image/*">Browse</div>
+                            <div class="featured-img">
+                                <img class="img-responsive margin-bottom-20" ngf-src="imgfile" ngf-no-object-url="false" alt="" ngf-resize="{width: 500, height: 500, quality: 0.9}">
+                            </div>
+                        </label>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn-u" ng-click="btnSubmitClick()">Submit</button>
+                    <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                </footer>
+            </form>
+        </div>
+        <!-- End Content -->
+    </div>
+</div><!--/container-->
+<!--=== End Content Part ===-->

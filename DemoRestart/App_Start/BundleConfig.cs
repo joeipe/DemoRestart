@@ -65,11 +65,14 @@ namespace DemoRestart
             bundles.Add(new ScriptBundle("~/bundles/demorestart-spa/scripts").Include(
                       "~/Scripts/lib/angular.js",
                       "~/Scripts/lib/angular-route.js",
+                      "~/Scripts/lib/ng-file-upload-shim.js",
+                      "~/Scripts/lib/ng-file-upload.js",
                       "~/Scripts/app/DemoRestartApp.js",
                       "~/Scripts/app/DataService.js",
                       "~/Scripts/app/StateForm/sfIndexController.js",
-                      "~/Scripts/app/StateForm/sfTemplateController.js"
-                      //"~/Scripts/app/StateForm/sfDirective.js"
+                      "~/Scripts/app/StateForm/sfTemplateController.js",
+                      "~/Scripts/app/CategoryForm/cfIndexController.js",
+                      "~/Scripts/app/CategoryForm/cfTemplateController.js"
                       ));
 
             BundleTable.EnableOptimizations = false;

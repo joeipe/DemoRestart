@@ -15,6 +15,8 @@ namespace DemoRestart.Infrastructure.Repository
 
         public IRepository<State> States { get { return new SqlRepository<State>(context); } }
 
+        public IRepository<Category> Categories { get { return new SqlRepository<Category>(context); } }
+
         public NorthwindUow()
         {
             CreateDbContext();

@@ -1,4 +1,4 @@
-﻿var demoRestartApp = angular.module("demoRestartApp", ["ngRoute"]);
+﻿var demoRestartApp = angular.module("demoRestartApp", ["ngRoute", "ngFileUpload"]);
 
 demoRestartApp.config(function ($routeProvider) {
     $routeProvider
@@ -16,6 +16,18 @@ demoRestartApp.config(function ($routeProvider) {
         .when("/editState/:stateId", {
             templateUrl: "/Scripts/app/StateForm/sfTemplate.html",
             controller: "sfTemplateController"
+        })
+        .when("/category", {
+            templateUrl: "/Scripts/app/CategoryForm/cfIndex.html",
+            controller: "cfIndexController"
+        })
+        .when("/addCategory", {
+            templateUrl: "/Scripts/app/CategoryForm/cfTemplate.html",
+            controller: "cfTemplateController"
+        })
+        .when("/editCategory/:categoryId", {
+            templateUrl: "/Scripts/app/CategoryForm/cfTemplate.html",
+            controller: "cfTemplateController"
         })
         .otherwise({ redirectTo: "/home" });
 });

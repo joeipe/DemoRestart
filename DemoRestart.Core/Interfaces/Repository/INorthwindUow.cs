@@ -10,6 +10,7 @@ namespace DemoRestart.Core.Interfaces.Repository
     public interface INorthwindUow : IDisposable
     {
         IRepository<State> States { get; }
+        IRepository<Category> Categories { get; }
 
         void Save();
     }
