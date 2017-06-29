@@ -19,111 +19,114 @@ namespace DemoRestart.Controllers
         }
 
         // GET api/<controller>
-        public IEnumerable<CategoryVM> Get()
+        public IHttpActionResult Get()
         {
-            List<CategoryVM> categoryList = new List<CategoryVM>();
-            var categories = Uow.Categories.GetAll();
-            foreach (var category in categories)
+            try
             {
-                var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
-                categoryList.Add(categoryVM);
+                List<CategoryVM> categoryList = new List<CategoryVM>();
+                var categories = Uow.Categories.GetAll();
+                foreach (var category in categories)
+                {
+                    var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
+                    categoryList.Add(categoryVM);
+                }
+                return Ok(categoryList);
             }
-            return categoryList;
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // GET api/<controller>/5
-        public HttpResponseMessage Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            Category category = Uow.Categories.GetById(id);
-
-            if (category == null)
+            try
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Not found!");
-            }
+                Category category = Uow.Categories.GetById(id);
 
-            var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
-            return Request.CreateResponse<CategoryVM>(HttpStatusCode.OK, categoryVM);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
+                return Ok(categoryVM);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody]CategoryVM categoryVM)
+        public IHttpActionResult Post([FromBody]CategoryVM categoryVM)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
+                Uow.Categories.Add(category);
+                Uow.Save();
+
+                return Created(new Uri(Request.RequestUri + "/" + category.CategoryID.ToString()), category);
             }
-            var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
-            Uow.Categories.Add(category);
-            Uow.Save();
-
-            var msg = Request.CreateResponse(HttpStatusCode.Created);
-            msg.Headers.Location = new Uri(Request.RequestUri + "/" + category.CategoryID.ToString());
-
-            return msg;
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // PUT api/<controller>/5
-        public HttpResponseMessage Put(int id, [FromBody]CategoryVM categoryVM)
+        public IHttpActionResult Put(int id, [FromBody]CategoryVM categoryVM)
         {
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-            }
-
-            var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
-            if (id != category.CategoryID)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            Uow.Categories.Edit(category);
-
             try
             {
-                Uow.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
+                if (!ModelState.IsValid)
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                    return BadRequest(ModelState);
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return Request.CreateResponse(HttpStatusCode.NoContent);
+                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
+                if (id != category.CategoryID)
+                {
+                    return BadRequest();
+                }
+
+                Uow.Categories.Edit(category);
+                Uow.Save();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // DELETE api/<controller>/5
-        public HttpResponseMessage Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-            Category category = Uow.Categories.GetById(id);
-            if (category == null)
+            try
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                Category category = Uow.Categories.GetById(id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                Uow.Categories.Delete(id);
+                Uow.Save();
+
+                return Ok();
             }
-
-            Uow.Categories.Delete(id);
-            Uow.Save();
-
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (Exception ex)
             {
-                Uow.Dispose();
+                return InternalServerError(ex);
             }
-            base.Dispose(disposing);
-        }
-
-        private bool CategoryExists(int id)
-        {
-            return Uow.Categories.GetAll().Count(e => e.CategoryID == id) > 0;
         }
     }
 }

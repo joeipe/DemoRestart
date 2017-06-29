@@ -9,7 +9,7 @@ namespace DemoRestart.Models
     public class StateVM
     {
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "State Name is required")]
         public string Name { get; set; }
     }
 }
