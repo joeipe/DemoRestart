@@ -1,0 +1,5 @@
+C:\Development\DemoRestart\DemoRestart.Core\bin\Release\DemoRestart.Core.dll
+C:\Development\DemoRestart\DemoRestart.Core\bin\Release\DemoRestart.Core.pdb
+C:\Development\DemoRestart\DemoRestart.Core\obj\Release\DemoRestart.Core.csprojResolveAssemblyReference.cache
+C:\Development\DemoRestart\DemoRestart.Core\obj\Release\DemoRestart.Core.dll
+C:\Development\DemoRestart\DemoRestart.Core\obj\Release\DemoRestart.Core.pdb

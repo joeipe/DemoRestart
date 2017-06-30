@@ -215,6 +215,8 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\Template\ajax\cube-portfolio\project1.html" />
     <Content Include="Content\Template\ajax\cube-portfolio\project2.html" />
     <Content Include="Content\Template\ajax\cube-portfolio\project3.html" />
@@ -5465,6 +5467,8 @@
     <Content Include="Scripts\lib\bootstrap.min.js" />
     <Content Include="Scripts\lib\angular.min.js.map" />
     <Content Include="Scripts\lib\angular-route.min.js.map" />
+    <None Include="Properties\PublishProfiles\demorestart - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\demorestart - Web Deploy.pubxml" />
     <None Include="Scripts\lib\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.js" />
     <Content Include="Scripts\lib\jquery-1.10.2.min.js" />
@@ -5540,6 +5544,8 @@
     <Content Include="Scripts\lib\ng-file-upload-shim.min.js" />
     <Content Include="Scripts\lib\ng-file-upload.js" />
     <Content Include="Scripts\lib\ng-file-upload.min.js" />
+    <Content Include="Scripts\lib\loading-bar.js" />
+    <Content Include="Scripts\lib\loading-bar.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

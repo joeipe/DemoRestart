@@ -11,6 +11,9 @@
 <!--=== End Breadcrumbs ===-->
 <!--=== Featured Blog ===-->
 <div class="container content-sm">
+    <div class="alert alert-danger fade in" ng-show="errorOnPage">
+        <strong>Oh snap!</strong> {{message}}
+    </div>
     <p>
         <button class="btn btn-success btn-xs" ng-click="showAddCategoryForm()"><i class="fa fa-plus"></i> Add New</button>
     </p>

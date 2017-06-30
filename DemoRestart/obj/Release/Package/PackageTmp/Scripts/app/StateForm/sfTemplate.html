@@ -1,0 +1,39 @@
+﻿<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">States</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="#!/home">Home</a></li>
+            <li><a href="#!/state">States</a></li>
+            <li class="active">{{ActionTxt}} State</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+<!--=== Content Part ===-->
+<div class="container content">
+    <div class="row">
+        <!-- Begin Content -->
+        <div class="col-md-12">
+            <!-- General Unify Forms -->
+            <form action="#" class="sky-form">
+                <header>{{ActionTxt}} State</header>
+                <fieldset>
+                    <section>
+                        <label class="label">State Name</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-asterisk"></i>
+                            <input type="text" ng-required="true" ng-model="state.name">
+                        </label>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn-u" ng-click="btnSubmitClick()">Submit</button>
+                    <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                </footer>
+            </form>
+        </div>
+        <!-- End Content -->
+    </div>
+</div><!--/container-->
+<!--=== End Content Part ===-->

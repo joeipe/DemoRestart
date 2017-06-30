@@ -12,6 +12,9 @@
 <!--=== End Breadcrumbs ===-->
 <!--=== Content Part ===-->
 <div class="container content">
+    <div class="alert alert-danger fade in" ng-show="errorOnPage">
+        <strong>Oh snap!</strong> {{message}}
+    </div>
     <div class="row">
         <!-- Begin Content -->
         <div class="col-md-12">

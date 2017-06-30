@@ -1,0 +1,44 @@
+﻿<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">States</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="#!/home">Home</a></li>
+            <li class="active">States</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+<!--=== Content ===-->
+<div class="container content height-500">
+    <!--Table Bordered-->
+    <div class="panel panel-grey margin-bottom-40">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-globe"></i> All States</h3>
+        </div>
+        <div class="panel-body">
+            <button class="btn btn-success btn-xs" ng-click="showAddStateForm()"><i class="fa fa-plus"></i> Add New</button>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>State Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="state in states">
+                        <td>{{state.name}}</td>
+                        <td>
+                            <button class="btn btn-warning btn-xs" ng-click="showEditStateForm(state.id)"><i class="fa fa-pencil"></i> Edit</button>
+                            <button class="btn btn-danger btn-xs" ng-click="deleteState(state.id)"><i class="fa fa-trash-o"></i> Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--End Table Bordered-->
+</div>
+<!--=== End Content ===-->

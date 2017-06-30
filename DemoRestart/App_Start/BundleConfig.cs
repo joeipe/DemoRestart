@@ -22,6 +22,7 @@ namespace DemoRestart
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/loading-bar.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/bundles/demorestart-spa/template/style").Include(
@@ -65,6 +66,7 @@ namespace DemoRestart
             bundles.Add(new ScriptBundle("~/bundles/demorestart-spa/scripts").Include(
                       "~/Scripts/lib/angular.js",
                       "~/Scripts/lib/angular-route.js",
+                      "~/Scripts/lib/loading-bar.js",
                       "~/Scripts/lib/ng-file-upload-shim.js",
                       "~/Scripts/lib/ng-file-upload.js",
                       "~/Scripts/app/DemoRestartApp.js",
