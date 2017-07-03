@@ -12,18 +12,21 @@
 <!--=== End Breadcrumbs ===-->
 <!--=== Content Part ===-->
 <div class="container content">
+    <div class="alert alert-danger fade in" ng-show="errorOnPage">
+        <strong>Oh snap!</strong> {{message}}
+    </div>
     <div class="row">
         <!-- Begin Content -->
         <div class="col-md-12">
             <!-- General Unify Forms -->
-            <form action="#" class="sky-form">
+            <form name="Categoryform" action="#" class="sky-form">
                 <header>{{ActionTxt}} Category</header>
                 <fieldset>
                     <section>
                         <label class="label">Category Name</label>
                         <label class="input">
                             <i class="icon-append fa fa-asterisk"></i>
-                            <input type="text" ng-required="true" ng-model="category.categoryName">
+                            <input type="text" required ng-model="category.categoryName">
                         </label>
                     </section>
                     <section>

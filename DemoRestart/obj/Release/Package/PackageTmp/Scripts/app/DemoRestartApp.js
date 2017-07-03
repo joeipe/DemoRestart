@@ -1,4 +1,4 @@
-﻿var demoRestartApp = angular.module("demoRestartApp", ["ngRoute", "ngFileUpload"]);
+﻿var demoRestartApp = angular.module("demoRestartApp", ["ngRoute", "ngFileUpload", "angular-loading-bar"]);
 
 demoRestartApp.config(function ($routeProvider) {
     $routeProvider

@@ -1,18 +1,25 @@
 ﻿demoRestartApp.controller("cfIndexController",
     function sfIndexController($scope, $location, DataService, cfpLoadingBar) {
+        var onError = function (response) {
+            $scope.message = response.statusText + "\r\n";
+            if (response.data.modelState) {
+                for (var key in response.data.modelState) {
+                    $scope.message += response.data.modelState[key] + "\r\n";
+                }
+            }
+            if (response.data.exceptionMessage) {
+                $scope.message += response.data.exceptionMessage;
+            }
+            $scope.errorOnPage = true;
+        };
+
         var getCategories = function () {
             cfpLoadingBar.start();
             DataService.getCategories()
                 .then(function (response) {
                     $scope.Categories = response.data;
                     $scope.errorOnPage = false;
-                }, function (response) {
-                    $scope.message = response.statusText + "\r\n";
-                    if (response.data.exceptionMessage) {
-                        $scope.message += response.data.exceptionMessage;
-                    }
-                    $scope.errorOnPage = true;
-                })
+                }, onError)
                 .finally(function () {
                     cfpLoadingBar.complete();
                 });
@@ -33,15 +40,8 @@
                     .then(function (reponse) {
                         getCategories();
                         $scope.errorOnPage = false;
-                    }, function (response) {
-                        $scope.message = response.statusText + "\r\n";
-                        if (response.data.exceptionMessage) {
-                            $scope.message += response.data.exceptionMessage;
-                        }
-                        $scope.errorOnPage = true;
-                    });
+                    }, onError);
             }
         }
-
         getCategories();
     });

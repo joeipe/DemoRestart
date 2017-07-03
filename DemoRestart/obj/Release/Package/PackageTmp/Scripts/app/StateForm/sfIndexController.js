@@ -1,11 +1,15 @@
 ﻿demoRestartApp.controller("sfIndexController", 
-    function sfIndexController($scope, $location, DataService) {
+    function sfIndexController($scope, $location, DataService, cfpLoadingBar) {
         var getStates = function () {
+            cfpLoadingBar.start();
             DataService.getStates()
                 .then(function (response) {
                     $scope.states = response.data;
                 }, function (response) {
 
+                })
+                .finally(function () {
+                    cfpLoadingBar.complete();
                 });
         };
 

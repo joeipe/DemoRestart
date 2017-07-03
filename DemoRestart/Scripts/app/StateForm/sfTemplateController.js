@@ -17,6 +17,7 @@
         }
 
         $scope.btnSubmitClick = function () {
+            if ($scope.stateform.$invalid) return false;
             if ($routeParams.stateId) {
                 DataService.editState($scope.state)
                     .then(function (response) {

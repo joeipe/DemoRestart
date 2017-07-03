@@ -1,24 +1,30 @@
 ﻿demoRestartApp.controller("cfTemplateController",
-    function sfTemplateController($scope, $routeParams, $location, $timeout, Upload, DataService) {
+    function sfTemplateController($scope, $routeParams, $location, $timeout, Upload, DataService, cfpLoadingBar) {
         if ($routeParams.categoryId) {
             $scope.ActionTxt = "Edit";
+            cfpLoadingBar.start();
             DataService.getCategory($routeParams.categoryId)
                 .then(function (response) {
                     $scope.category = response.data;
                     var file = new Blob([$scope.category.picture], { type: 'image/jpeg' });
                     $scope.imgfile = file;
+                    $scope.errorOnPage = false;
                 }, function (response) {
                     $scope.message = response.statusText + "\r\n";
                     if (response.data.exceptionMessage) {
                         $scope.message += response.data.exceptionMessage;
                     }
-                })
+                    $scope.errorOnPage = true;
+                }).finally(function () {
+                    cfpLoadingBar.complete();
+                });
         } else {
             $scope.ActionTxt = "Add";
             $scope.category = {};
         }
 
         $scope.btnSubmitClick = function () {
+            if ($scope.Categoryform.$invalid) return false;
             if ($routeParams.categoryId) {
                 DataService.editCategory($scope.category)
                     .then(function (response) {
@@ -33,7 +39,8 @@
                         if (response.data.exceptionMessage) {
                             $scope.message += response.data.exceptionMessage;
                         }
-                    })
+                        $scope.errorOnPage = true;
+                    });
             } else {
                 DataService.addCategory($scope.category)
                     .then(function (response) {
@@ -44,11 +51,12 @@
                             for (var key in response.data.modelState) {
                                 $scope.message += response.data.modelState[key] + "\r\n";
                             }
-                        } 
+                        }
                         if (response.data.exceptionMessage) {
                             $scope.message += response.data.exceptionMessage;
                         }
-                    })
+                        $scope.errorOnPage = true;
+                    });
             }
         }
 
