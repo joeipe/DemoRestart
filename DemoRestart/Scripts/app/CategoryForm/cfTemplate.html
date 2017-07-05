@@ -38,9 +38,9 @@
                     <section>
                         <label class="label">Picture</label>
                         <label for="file" class="input input-file">
-                            <div class="button"><input type="file" id="file" ngf-select="upload($file)" accept="image/*">Browse</div>
+                            <div class="button"><input type="file" id="file" ngf-select="uploadFile($file)" accept="image/*">Browse</div>
                             <div class="featured-img">
-                                <img class="img-responsive margin-bottom-20" ngf-src="imgfile" ngf-no-object-url="false" alt="" ngf-resize="{width: 500, height: 500, quality: 0.9}">
+                                <img class="img-responsive margin-bottom-20" ng-src="/api/files/{{category.pictureID}}" alt="">
                             </div>
                         </label>
                     </section>

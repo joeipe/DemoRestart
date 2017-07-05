@@ -1,71 +1,5 @@
 ﻿demoRestartApp.controller("cfTemplateController",
-    function sfTemplateController($scope, $routeParams, $location, $timeout, Upload, DataService, cfpLoadingBar) {
-
-
-
-        function ArrayBufferToString(buffer) {
-            return BinaryToString(String.fromCharCode.apply(null, Array.prototype.slice.apply(new Uint8Array(buffer))));
-        }
-
-        function StringToArrayBuffer(string) {
-            return StringToUint8Array(string).buffer;
-        }
-
-        function BinaryToString(binary) {
-            var error;
-
-            try {
-                return decodeURIComponent(escape(binary));
-            } catch (_error) {
-                error = _error;
-                if (error instanceof URIError) {
-                    return binary;
-                } else {
-                    throw error;
-                }
-            }
-        }
-
-        function StringToBinary(string) {
-            var chars, code, i, isUCS2, len, _i;
-
-            len = string.length;
-            chars = [];
-            isUCS2 = false;
-            for (i = _i = 0; 0 <= len ? _i < len : _i > len; i = 0 <= len ? ++_i : --_i) {
-                code = String.prototype.charCodeAt.call(string, i);
-                if (code > 255) {
-                    isUCS2 = true;
-                    chars = null;
-                    break;
-                } else {
-                    chars.push(code);
-                }
-            }
-            if (isUCS2 === true) {
-                return unescape(encodeURIComponent(string));
-            } else {
-                return String.fromCharCode.apply(null, Array.prototype.slice.apply(chars));
-            }
-        }
-
-        function StringToUint8Array(string) {
-            var binary, binLen, buffer, chars, i, _i;
-            binary = StringToBinary(string);
-            binLen = binary.length;
-            buffer = new ArrayBuffer(binLen);
-            chars = new Uint8Array(buffer);
-            for (i = _i = 0; 0 <= binLen ? _i < binLen : _i > binLen; i = 0 <= binLen ? ++_i : --_i) {
-                chars[i] = String.prototype.charCodeAt.call(binary, i);
-            }
-            return chars;
-        }
-
-
-
-
-
-
+    function sfTemplateController($scope, $routeParams, $location, $timeout, DataService, Upload, cfpLoadingBar) {
         var onError = function (response) {
             $scope.message = response.statusText + "\r\n";
             if (response.data.modelState) {
@@ -85,8 +19,6 @@
             DataService.getCategory($routeParams.categoryId)
                 .then(function (response) {
                     $scope.category = response.data;
-                    var file = new Blob([$scope.category.picture], { type: 'image/jpeg' });
-                    $scope.imgfile = file;
                     $scope.errorOnPage = false;
                 }, onError)
                 .finally(function () {
@@ -99,7 +31,8 @@
 
         $scope.btnSubmitClick = function () {
             if ($scope.Categoryform.$invalid) return false;
-            if ($routeParams.categoryId) {
+
+            if ($scope.category.categoryID) {
                 DataService.editCategory($scope.category)
                     .then(function (response) {
                         GoBack();
@@ -110,21 +43,33 @@
                         GoBack();
                     }, onError);
             }
-        }
+        };
+
+        $scope.uploadFile = function (file) {
+            if (file) {
+                cfpLoadingBar.start();
+                Upload.upload({
+                    url: "/api/files/upload", // webapi url
+                    method: "POST",
+                    //data: { fileUploadObj: $scope.fileUploadObj },
+                    file: file
+                }).progress(function (evt) {
+                    // get upload percentage
+                    //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    $scope.category.pictureID = data.returnData;
+                    cfpLoadingBar.complete();
+                }).error(function (data, status, headers, config) {
+                    $scope.message = status + "\r\n";
+                    $scope.errorOnPage = true;
+                    cfpLoadingBar.complete();
+                });
+            } else {
+                $scope.category.pictureID = null;
+            }
+        };
 
         var GoBack = function () {
             $location.path('/category');
-        };
-
-        $scope.upload = function (file) {
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var arrayBuffer = this.result;
-                    $scope.category.picture = ArrayBufferToString(arrayBuffer);
-                }
-                reader.readAsArrayBuffer(file);
-            }
-            $scope.imgfile = file;
         };
     });

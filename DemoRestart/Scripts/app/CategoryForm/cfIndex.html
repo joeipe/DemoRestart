@@ -18,15 +18,15 @@
         <button class="btn btn-success btn-xs" ng-click="showAddCategoryForm()"><i class="fa fa-plus"></i> Add New</button>
     </p>
     <div class="row featured-blog">
-        <div class="col-sm-4 sm-margin-bottom-50" ng-repeat="Category in Categories">
-            <div class="featured-img">
-                <img class="img-responsive margin-bottom-20" ng-src="data:image/JPEG;base64,{{Category.picture}}" alt="">
+        <div class="col-sm-4 sm-margin-bottom-50" ng-repeat="category in categories">
+            <div class="feature-img">
+                <img class="img-responsive margin-bottom-20" ng-src="/api/files/{{category.pictureID}}" alt="">
             </div>
-            <h2><a class="color-dark" href="#">{{Category.categoryName}}</a></h2>
-            <p>{{Category.description}}</p>
+            <h2><a class="color-dark" href="#">{{category.categoryName}}</a></h2>
+            <p>{{category.description}}</p>
             <p>
-                <button class="btn btn-warning btn-xs" ng-click="showEditCategoryForm(Category.categoryID)"><i class="fa fa-pencil"></i> Edit</button>
-                <button class="btn btn-danger btn-xs" ng-click="deleteCategory(Category.categoryID)"><i class="fa fa-trash-o"></i> Delete</button>
+                <button class="btn btn-warning btn-xs" ng-click="showEditCategoryForm(category.categoryID)"><i class="fa fa-pencil"></i> Edit</button>
+                <button class="btn btn-danger btn-xs" ng-click="deleteCategory(category.categoryID)"><i class="fa fa-trash-o"></i> Delete</button>
             </p>
         </div>
     </div><!--/end row-->

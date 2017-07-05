@@ -27,7 +27,7 @@ namespace DemoRestart.Controllers
                 var categories = Uow.Categories.GetAll();
                 foreach (var category in categories)
                 {
-                    var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
+                    var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, PictureID = category.PictureID };
                     categoryList.Add(categoryVM);
                 }
                 return Ok(categoryList);
@@ -50,7 +50,7 @@ namespace DemoRestart.Controllers
                     return NotFound();
                 }
 
-                var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, Picture = category.Picture };
+                var categoryVM = new CategoryVM { CategoryID = category.CategoryID, CategoryName = category.CategoryName, Description = category.Description, PictureID = category.PictureID };
                 return Ok(categoryVM);
             }
             catch (Exception ex)
@@ -68,7 +68,8 @@ namespace DemoRestart.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
+
+                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, PictureID = categoryVM.PictureID };//, Picture = categoryVM.Picture
                 Uow.Categories.Add(category);
                 Uow.Save();
 
@@ -90,7 +91,7 @@ namespace DemoRestart.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, Picture = categoryVM.Picture };
+                var category = new Category { CategoryID = categoryVM.CategoryID, CategoryName = categoryVM.CategoryName, Description = categoryVM.Description, PictureID = categoryVM.PictureID };//, Picture = categoryVM.Picture
                 if (id != category.CategoryID)
                 {
                     return BadRequest();

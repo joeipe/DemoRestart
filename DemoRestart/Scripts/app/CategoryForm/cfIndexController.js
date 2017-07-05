@@ -17,7 +17,7 @@
             cfpLoadingBar.start();
             DataService.getCategories()
                 .then(function (response) {
-                    $scope.Categories = response.data;
+                    $scope.categories = response.data;
                     $scope.errorOnPage = false;
                 }, onError)
                 .finally(function () {
@@ -43,5 +43,6 @@
                     }, onError);
             }
         }
+
         getCategories();
     });
